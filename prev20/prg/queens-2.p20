@@ -1,0 +1,63 @@
+fun main():integer =
+    {
+      n=getInteger();
+      n=queens(0);
+      putString("# ALL SOLUTIONS = ");
+      putInteger(n);
+      putChar((10:char));
+      putChar((10:char));
+      0;
+    }
+    where
+    {
+      var n:integer
+      var qs:[32]integer
+      fun queens(i:integer):integer =
+          {
+            if i==n then
+              {
+                putString("SOLUTION");
+                putChar((10:char));
+                j=0;
+                while j<n do {
+                  i=0;
+                  while i<n do {
+                    putChar({if qs[i]==j then c='O' else c='.'; c; }
+                            where { var c:char });
+                    i=i+1;
+                  };
+                  putChar((10:char));
+                  j=j+1;
+                };
+                putChar((10:char));
+                all=1;
+              }
+            else
+              {
+                all=0;
+                j=0;
+                while j<n do {
+                  qs[i]=j;
+                  ok=true;
+                  {
+                    k=0;
+                    while k<i do {
+                      ok=ok&(qs[k]!=qs[i]);
+                      ok=ok&(qs[k]-qs[i]!=k-i);
+                      ok=ok&(qs[k]-qs[i]!=i-k);
+                      k=k+1;
+                    };
+                  } where { var k:integer };
+                  if ok then all=all+queens(i+1) else none;
+                  j=j+1;
+                };
+              };
+            all;
+          }
+          where
+          {
+            var j:integer
+            var ok:boolean
+            var all:integer
+          }
+    }

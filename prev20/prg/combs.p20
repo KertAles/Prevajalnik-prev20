@@ -1,0 +1,42 @@
+
+fun combs(i:integer,n:integer,ns:^([32]integer)):void =
+    {
+      if (i==n) then
+        {
+          j=0;
+          while j<n do {
+            putInteger(ns^[j]);
+            putChar(' ');
+            j=j+1;
+          };
+          putChar((10:char));
+        } where { var j:integer }
+      else
+        {
+          j=0;
+          while j<n do {
+            ns^[i]=j;
+            combs(i+1,n,ns);
+            j=j+1;
+          };
+        } where { var j:integer };
+    }
+
+fun main():integer =
+    {
+      n=getInteger();
+      {
+        i=0;
+        while i<n do {
+          ns[i] = i;
+          i=i+1;
+        };
+      } where { var i:integer };
+      combs(0,n,^ns);
+      0;
+    }
+    where
+    {
+      var n:integer
+      var ns:[32]integer
+    }

@@ -1,0 +1,42 @@
+fun perms(i:integer,n:integer,ns:^([32]integer)):void =
+    {
+      if i==n then
+        {
+          j=0;
+          while j<n do {
+            putInteger(ns^[j]);
+            putChar(' ');
+            j=j+1;
+          };
+          putChar((10:char));
+        } where { var j:integer }
+      else
+        {
+          j=i;
+          while j<n do {
+            { tmp=ns^[i];ns^[i]=ns^[j];ns^[j]=tmp; } where { var tmp:integer };
+            perms(i+1,n,ns);
+            { tmp=ns^[i];ns^[i]=ns^[j];ns^[j]=tmp; } where { var tmp:integer };
+            j=j+1;
+          };
+        } where { var j:integer };
+    }
+
+fun main():integer =
+    {
+      n=getInteger();
+      {
+        i=0;
+        while i<n do {
+          ns[i]=i;
+          i=i+1;
+        };
+      } where { var i:integer };
+      perms(0,n,^ns);
+      0;
+    }
+    where
+    {
+      var n:integer
+      var ns:[32]integer
+    }

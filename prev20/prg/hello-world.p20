@@ -1,0 +1,7 @@
+fun main():integer =
+    { str = "Hello, world.";
+      putString(str);
+      putChar((10:char));
+      0; }
+
+var str:^char

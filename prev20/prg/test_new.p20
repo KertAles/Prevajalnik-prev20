@@ -1,0 +1,13 @@
+fun main():integer =
+    { 
+      ptr = new 8;
+      ptr^ = 64;
+      ptr2 = new 8;
+      ptr2^ = 116;
+      putChar((ptr^:char));
+      putChar((ptr2^:char));
+      0; 
+      }
+
+var ptr:^integer
+var ptr2:^integer
